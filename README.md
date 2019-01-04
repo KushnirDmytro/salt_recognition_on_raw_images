@@ -1,6 +1,11 @@
 # salt_recognition_on_raw_images
 course project on "Basics of data processing" cource from UCU bachelour programme. 
 
+# Content:
+
+# How to reproduce:
+
+# ?
 
 Project aim: compare state-of-art approach to segmentaion of seismic images with such a classic approach as application of Grayscale Covariance matrix and Haralic textural features.
 
