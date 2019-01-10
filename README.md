@@ -2,11 +2,11 @@
 course project on "Basics of data processing" cource from UCU bachelour programme. 
 
 # Content:
-1) Description of data and problem conserned.
-2) Description of method used.
-3) Method to compare described.
-4) Final results.
-5) How to reproduce.
+### 1. Description of data and problem conserned.
+### 2. Description of method used.
+### 3. Method to compare described.
+### 4. Obtained results.
+### 5. How to reproduce.
 
 
 
@@ -73,6 +73,24 @@ The following figure shows how graycomatrix calculates several values in the GLC
 #                3. Method to compare described
 
 ### CNN:
+
+#                 4. Final results
+
+## todo: generated features
+
+As we have lots of pixels in those iamges, processing them with XGboost is very time and computational consuming.
+To get the best features subset we used Forvard Features Selection approach to get rid of extensive computing
+
+Using approach proposed in [3] we've took features with parameter radius 3, 9, 18  in order to grasp features-over-neighbourhood in a manner as CNN grasps surrounding context with convoluitions.
+
+![prediction_example](https://user-images.githubusercontent.com/17781705/50965143-d1b0e280-14d9-11e9-82d1-257c15d1ef7c.png)
+
+
+metric used is IoU score or 'Jaccard similarity'
+![IoU](https://upload.wikimedia.org/wikipedia/commons/c/c7/Intersection_over_Union_-_visual_equation.png)
+
+TODO insert images and values
+
 
 #                5. How to reproduce
 1) Install Haralic Toolbox according to tutorial from https://www.orfeo-toolbox.org/CookBook/Installation.html 
