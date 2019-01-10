@@ -12,7 +12,21 @@ course project on "Basics of data processing" cource from UCU bachelour programm
 
 #               1. Description of data and problem concerned
 
-As the seismic images are using sensors to read waves reflections from the layers of layers structures, the patterns we see on those synthesized images are the result of different waves spreading speed and dispersal properties of minerals. Those properties of a salt result in blurry textures on corresponding regions of the image. This property was often used in field-specific research[1,5] to obtain an automated segmentation of salt deposits using textural statistics computed from GLCM [2]. Figure 1 shows several cases where GLCM-derived features fail to correctly segment salt.
+  ## Problem description
+
+The task is to correctly segment salt deposits on the seismic images of Earth subsurface.
+
+  ## Motivation
+
+Several areas of Earth with large accumulations of oil and gas also have huge deposits of salt below the surface.
+But unfortunately, knowing where large salt deposits are precisely is very difficult. Professional seismic imaging requires manual labeling of a data, which is time consuming, expensive, not scalable to bigger amounts of data and often results in subjective, highly variable renderings. More alarmingly, it leads to potentially dangerous situations for oil and gas company drillers.  
+Therefore, automatic and accurate salt regions segmentation seems like a worthwhile enterprise.
+
+  ## Data analysis
+    
+A seismic image is produced from imaging the reflection coming from rock boundaries, caused by a controlled seismic source of energy, such as compressed air or a seismic vibrator. Since usually salt is an amorphous rock without much internal structure there is typically not much reflectivity inside the salt, unless there are sediments trapped inside it. (Therefore no clear pattern)The unusually high anisotropy of salt velocities can also create problems with seismic imaging. [11]
+The dataset consists of images cropped from the larger-scale seismic snapshot into 101 x 101 pixels images and each pixel is classified as either salt or sediment. In addition to the seismic images, each sample is accompanied with depth value on which it was taken. 4000 images with salt masks are available for training and 18000 are used for testing (no ground-truth masks provided).
+
 
 
 #                 2. Description of main method used
@@ -55,6 +69,9 @@ The following figure shows how graycomatrix calculates several values in the GLC
 
 <IMAGE 2>
 
+#                3. Method to compare described
+
+### CNN:
 
 #                5. How to reproduce
 1) Install Haralic Toolbox according to tutorial from https://www.orfeo-toolbox.org/CookBook/Installation.html 
