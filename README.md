@@ -64,8 +64,7 @@ This matrix is square with dimension Ng, where Ng is the number of gray levels i
 ### Spatial relationship between two pixels:
 GLCM texture considers the relation between two pixels at a time, called the reference and the neighbour pixel. In the illustration below, the neighbour pixel is chosen to be the one to the east (right) of each reference pixel. This can also be expressed as a (1,0) relation: 1 pixel in the x direction, 0 pixels in the y direction.
 
-![haralic s_correlation_f](https://user-images.githubusercontent.com/17781705/50964095-2010b200-14d7-11e9-8636-a8dc80ba614b.png)
-
+![grayscale_neigbours](https://user-images.githubusercontent.com/17781705/50964093-1edf8500-14d7-11e9-9b9a-2aac29cdf84b.gif)
 
 The following figure shows how graycomatrix calculates several values in the GLCM of the 4-by-5 image I. Element (1,1) in the GLCM contains the value 1 because there is only one instance in the image where two, horizontally adjacent pixels have the values 1 and 1. Element (1,2) in the GLCM contains the value 2 because there are two instances in the image where two, horizontally adjacent pixels have the values 1 and 2. graycomatrix continues this processing to fill in all the values in the GLCM.
 
