@@ -27,6 +27,7 @@ Therefore, automatic and accurate salt regions segmentation seems like a worthwh
 A seismic image is produced from imaging the reflection coming from rock boundaries, caused by a controlled seismic source of energy, such as compressed air or a seismic vibrator. Since usually salt is an amorphous rock without much internal structure there is typically not much reflectivity inside the salt, unless there are sediments trapped inside it. (Therefore no clear pattern)The unusually high anisotropy of salt velocities can also create problems with seismic imaging. [11]
 The dataset consists of images cropped from the larger-scale seismic snapshot into 101 x 101 pixels images and each pixel is classified as either salt or sediment. In addition to the seismic images, each sample is accompanied with depth value on which it was taken. 4000 images with salt masks are available for training and 18000 are used for testing (no ground-truth masks provided).
 
+![seismic_example](https://user-images.githubusercontent.com/17781705/50963982-d32cdb80-14d6-11e9-9818-5e5beabc70c7.png)
 
 
 #                 2. Description of main method used
@@ -63,11 +64,12 @@ This matrix is square with dimension Ng, where Ng is the number of gray levels i
 ### Spatial relationship between two pixels:
 GLCM texture considers the relation between two pixels at a time, called the reference and the neighbour pixel. In the illustration below, the neighbour pixel is chosen to be the one to the east (right) of each reference pixel. This can also be expressed as a (1,0) relation: 1 pixel in the x direction, 0 pixels in the y direction.
 
-<IMAGE 1>
+![haralic s_correlation_f](https://user-images.githubusercontent.com/17781705/50964095-2010b200-14d7-11e9-8636-a8dc80ba614b.png)
+
 
 The following figure shows how graycomatrix calculates several values in the GLCM of the 4-by-5 image I. Element (1,1) in the GLCM contains the value 1 because there is only one instance in the image where two, horizontally adjacent pixels have the values 1 and 1. Element (1,2) in the GLCM contains the value 2 because there are two instances in the image where two, horizontally adjacent pixels have the values 1 and 2. graycomatrix continues this processing to fill in all the values in the GLCM.
 
-<IMAGE 2>
+![referenceetoh38](https://user-images.githubusercontent.com/17781705/50964101-22730c00-14d7-11e9-8280-4305829e2f87.gif)
 
 #                3. Method to compare described
 
