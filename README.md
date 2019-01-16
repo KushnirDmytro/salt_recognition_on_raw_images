@@ -82,7 +82,7 @@ The following figure shows how graycomatrix calculates several values in the GLC
 
 #                3. Method to compare described
 
-### CNN: [in collaboration with Dzvenymyra-Marta Yarish]
+### CNN: [in collaboration with Dzvenymyra-Marta Yarish]: git https://github.com/DzvinkaYarish/kaggle_tgs_salt_challenge
   In recent years, neural networks have found successful application in various tasks and problems. Solution of those tasks require the construction of good internal representations of the world (or ”features”), which must be invariant to irrelevant variations of the input while preserving relevant information. A major question for machine learning is how to learn such good features automatically. In our case it is how to learn the distinctive features of salt and other sediments, which do not depend on brightness, orientation etc. Convolutional Neural Networks (CNNs) are a biologically-inspired trainable architecture that can learn such invariant features.
   
   Each stage in a CNN is composed of several filter layers, some non-linear transformations, and feature pooling layers. With multiple stages, a CNN can learn multi-level hierarchies of features.[11] which proved to be highly effective representations of data for computer vision tasks, such as image classification, segmentation and object detection.  One of the main problems with using CNNs for segmentation is pooling layers. Pooling layers increase the field of view and are able to aggregate the context while discarding the ‘where’ information. However, semantic segmentation requires the exact alignment of class maps and thus, needs the ‘where’ information to be preserved. Two different classes of architectures evolved in the literature to tackle this issue.
