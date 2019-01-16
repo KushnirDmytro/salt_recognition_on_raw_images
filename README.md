@@ -14,7 +14,16 @@ course project on "Basics of data processing" cource from UCU bachelour programm
 
   ## Problem description
 
-The task is to correctly segment salt deposits on the seismic images of Earth subsurface.
+### Project aim: 
+Compareing the state-of-art approach to segmentaion of seismic images with such a classic approach as application of Grayscale Covariance matrix and Haralic textural featuresх [1,2].
+
+### The source of dataset:
+is https://www.kaggle.com/c/tgs-salt-identification-challenge/ and 'state-of-art' approach is one of the award-winning models from the result of named competiotion.
+
+https://www.kaggle.com/c/tgs-salt-identification-challenge/data
+
+Kaggle API download: 'kaggle competitions download -c tgs-salt-identification-challenge'
+
 
   ## Motivation
 
@@ -72,16 +81,28 @@ The following figure shows how graycomatrix calculates several values in the GLC
 
 #                3. Method to compare described
 
-### CNN:
+### CNN: [in collaboration with Dzvenymyra-Marta Yarish]
+In recent years, neural networks have found successful application in various tasks and problems, in many cases exceeding the performance of conventional approaches [ref]. Solution of those tasks require the construction of good internal representations of the world (or ”features”), which must be invariant to irrelevant variations of the input while preserving relevant information. A major question for machine learning is how to learn such good features automatically. In our case it is how to learn the distinctive features of salt and other sediments, which do not depend on brightness, orientation etc. Convolutional Neural Networks (CNNs) are a biologically-inspired trainable architecture that can learn such invariant features.
+Each stage in a CNN is composed of several filter layers, some non-linear transformations, and feature pooling layers. With multiple stages, a CNN can learn multi-level hierarchies of features.[11] which proved to be highly effective representations of data for computer vision tasks, such as image classification, segmentation and object detection. Another undisputable benefit of CNNs is that they are computationally more efficient than fully-connected networks[ref].  One of the main problems with using CNNs for segmentation is pooling layers. Pooling layers increase the field of view and are able to aggregate the context while discarding the ‘where’ information. However, semantic segmentation requires the exact alignment of class maps and thus, needs the ‘where’ information to be preserved. Two different classes of architectures evolved in the literature to tackle this issue.
+Architectures in the first class use what are called as dilated/atrous convolutions[12] and discard pooling layers.
+Second one is encoder-decoder architecture. Encoder gradually reduces the spatial dimension with pooling layers and decoder gradually recovers the object details and spatial dimension. There are usually shortcut connections from encoder to decoder to help decoder recover the object details better. U-Net is a popular architecture from this class[10]. In our approach we chose to use U-Net architecture, as it enables us to easily change and experiment with different, possibly pretrained encoder types, leaving the decoder unchanged. 
+Concerning the architecture of encoders we explored, three are worth mentioning here:
+Res-Net-34[8]
+Dense-Net-121 [9]
+SE-ResNext-50[10]  
+The motivations behind ResNet and DenseNet are quite similar: to allow training of much deeper nets tackling the problem of vanishing gradient. This is an important issue, since deep nets are more capable of good enough mapping approximation. ResNet achieves this by exploiting the idea that the residual mapping F(x):=H(x)−x is easier to optimize than the original, unreferenced mapping H(x).  x here is realised through introducing skip-connections in feed-forward neural network, which perform identity mapping.
+
+
 
 #                 4. Final results
-
-## todo: generated features
 
 As we have lots of pixels in those iamges, processing them with XGboost is very time and computational consuming.
 To get the best features subset we used Forvard Features Selection approach to get rid of extensive computing
 
+![image](https://user-images.githubusercontent.com/17781705/51254363-9e72c580-19a9-11e9-838a-48b6ef52542a.png)
+
 Using approach proposed in [3] we've took features with parameter radius 3, 9, 18  in order to grasp features-over-neighbourhood in a manner as CNN grasps surrounding context with convoluitions.
+
 
 ![prediction_example](https://user-images.githubusercontent.com/17781705/50965143-d1b0e280-14d9-11e9-82d1-257c15d1ef7c.png)
 
@@ -89,7 +110,27 @@ Using approach proposed in [3] we've took features with parameter radius 3, 9, 1
 metric used is IoU score or 'Jaccard similarity'
 ![IoU](https://upload.wikimedia.org/wikipedia/commons/c/c7/Intersection_over_Union_-_visual_equation.png)
 
-TODO insert images and values
+### Application example:
+![image](https://user-images.githubusercontent.com/17781705/51253363-b9900600-19a6-11e9-9e1c-c0a100163c32.png)
+
+## Examples of exatracted features:
+### (format: <subclass of features>_<window_size>_<feature_name>_<features_index_in_tiff_file>)
+
+![image](https://user-images.githubusercontent.com/17781705/51254432-c95d1980-19a9-11e9-9a68-6c183f540967.png)
+![image](https://user-images.githubusercontent.com/17781705/51253309-9c5b3780-19a6-11e9-9d25-d07049b30da1.png)
+![image](https://user-images.githubusercontent.com/17781705/51253554-4a66e180-19a7-11e9-9dad-8fc1a74226e0.png)
+![image](https://user-images.githubusercontent.com/17781705/51253898-530be780-19a8-11e9-9d69-653ecaf3a345.png)
+
+
+### Resulting 'best' features rankings:
+![image](https://user-images.githubusercontent.com/17781705/51252853-8e58e700-19a5-11e9-94c5-94adcdf7d622.png)
+
+
+### Results from Kaggle Top competitors (ansembling and postprocessing used):
+![image](https://user-images.githubusercontent.com/17781705/51253732-d2e58200-19a7-11e9-8d2c-20d0f5869003.png)
+
+### Result from one CNN model iou 0.857432
+### Result from our model: (obtained on 100 images) 0.856856
 
 
 #                5. How to reproduce
@@ -97,21 +138,22 @@ TODO insert images and values
 additionally you may need to have .tiff files processing library installed on your system.
 2) Prepare data via downloading from sources and unpacking into '/data' directory in the same directory as working script.
 3) Launch notebook.
-3) To reproduce deep convilutional network approaches use recomendations from stated repository: [#TODO Dzvinka's repo].
+3) To reproduce deep convilutional network approaches use recomendations from stated repository: [https://github.com/DzvinkaYarish/kaggle_tgs_salt_challenge].
 
-# ?
 
-Project aim: compare state-of-art approach to segmentaion of seismic images with such a classic approach as application of Grayscale Covariance matrix and Haralic textural featuresх [1,2].
+# Conclusion:
 
-The source of dataset is https://www.kaggle.com/c/tgs-salt-identification-challenge/ and 'state-of-art' approach is one of the award-winning models from the result of named competiotion.
+## Comparison table:
+![image](https://user-images.githubusercontent.com/17781705/51252268-0e7e4d00-19a4-11e9-8920-c35d1f4e892a.png)
 
-#TODO add link to implimentation used
+## Overall:
+Statistical-based image preprocessing is still great for image 
+Competitive data science and real-world tasks may not use the same notion of state-of-art
 
-https://www.kaggle.com/c/tgs-salt-identification-challenge/data
-
-Kaggle API download: 'kaggle competitions download -c tgs-salt-identification-challenge'
-
-For final accuracy evaluations had been used 'late submission' tool from mentionned Kaggle competition.
+## Future work:
+- automated postprocessing
+- exhaustive search of best parameters for generating features
+- XGBoost fine-tuning
 
 # List of refferences:
 [1] Haralick, R.M., K. Shanmugan, and I. Dinstein, "Textural Features for Image Classification", IEEE Transactions on Systems, Man, and Cybernetics, Vol. SMC-3, 1973, pp. 610-621.
@@ -129,6 +171,15 @@ For final accuracy evaluations had been used 'late submission' tool from mention
 
 [7]  Xinming Wu (2016). ”Methods to compute salt likelihoods and extract salt boundaries from 3D seismic images.” GEOPHYSICS, 81(6), IM119-IM126.[https://doi.org/10.1190/geo2016-0250.1 ]
 
+[8] Olaf Ronneberger, Philipp Fischer & Thomas Brox (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation. CoRR, abs/1505.04597. [https://arxiv.org/abs/1505.04597] 
+
+[9] Gao Huang, Zhuang Liu, Laurens van der Maaten, Kilian Q. Weinberger. (2016). Densely Connected Convolutional Networks. , abs/1608.06993    [https://arxiv.org/abs/1608.06993]
+
+[10] Jie Hu (2017). Squeeze-and-Excitation Networks. CoRR, abs/1709.01507 [https://arxiv.org/abs/1709.01507] 
+
+[11] Ilya Loshchilov & Frank Hutter (2016). SGDR: Stochastic Gradient Descent with Restarts. CoRR, abs/1608.03983 [https://arxiv.org/abs/1608.03983] 
+
+[12] Gao Huang, Yixuan Li, Geoff Pleiss, Zhuang Liu, John E. Hopcroft Kilian Q. Weinberger (2017). Snapshot Ensembles: Train 1, get M for free. CoRR, abs/1704.00109, [https://arxiv.org/abs/1704.00109] 
 
 # Libraries and implementations used:
 
