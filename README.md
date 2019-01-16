@@ -90,6 +90,7 @@ Concerning the architecture of encoders we explored, three are worth mentioning 
  - Res-Net-34[8]
  - Dense-Net-121 [9]
  - SE-ResNext-50[10]  
+ 
 The motivations behind ResNet and DenseNet are quite similar: to allow training of much deeper nets tackling the problem of vanishing gradient. This is an important issue, since deep nets are more capable of good enough mapping approximation. ResNet achieves this by exploiting the idea that the residual mapping F(x):=H(x)−x is easier to optimize than the original, unreferenced mapping H(x).  x here is realised through introducing skip-connections in feed-forward neural network, which perform identity mapping.
 
 
