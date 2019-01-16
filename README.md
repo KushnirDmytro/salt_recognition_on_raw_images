@@ -115,9 +115,7 @@ metric used is IoU score or 'Jaccard similarity'
 
 ## Examples of exatracted features:
 ### (format: <subclass of features>_<window_size>_<feature_name>_<features_index_in_tiff_file>)
-
-![image](https://user-images.githubusercontent.com/17781705/51254432-c95d1980-19a9-11e9-9a68-6c183f540967.png)
-![image](https://user-images.githubusercontent.com/17781705/51253309-9c5b3780-19a6-11e9-9d25-d07049b30da1.png)
+  
 ![image](https://user-images.githubusercontent.com/17781705/51253554-4a66e180-19a7-11e9-9dad-8fc1a74226e0.png)
 ![image](https://user-images.githubusercontent.com/17781705/51253898-530be780-19a8-11e9-9d69-653ecaf3a345.png)
 
