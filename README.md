@@ -84,9 +84,13 @@ The following figure shows how graycomatrix calculates several values in the GLC
 
 ### CNN: [in collaboration with Dzvenymyra-Marta Yarish]
   In recent years, neural networks have found successful application in various tasks and problems. Solution of those tasks require the construction of good internal representations of the world (or ”features”), which must be invariant to irrelevant variations of the input while preserving relevant information. A major question for machine learning is how to learn such good features automatically. In our case it is how to learn the distinctive features of salt and other sediments, which do not depend on brightness, orientation etc. Convolutional Neural Networks (CNNs) are a biologically-inspired trainable architecture that can learn such invariant features.
+  
   Each stage in a CNN is composed of several filter layers, some non-linear transformations, and feature pooling layers. With multiple stages, a CNN can learn multi-level hierarchies of features.[11] which proved to be highly effective representations of data for computer vision tasks, such as image classification, segmentation and object detection.  One of the main problems with using CNNs for segmentation is pooling layers. Pooling layers increase the field of view and are able to aggregate the context while discarding the ‘where’ information. However, semantic segmentation requires the exact alignment of class maps and thus, needs the ‘where’ information to be preserved. Two different classes of architectures evolved in the literature to tackle this issue.
+  
   Architectures in the first class use what are called as dilated/atrous convolutions[12] and discard pooling layers.
+  
   Second one is encoder-decoder architecture. Encoder gradually reduces the spatial dimension with pooling layers and decoder gradually recovers the object details and spatial dimension. There are usually shortcut connections from encoder to decoder to help decoder recover the object details better. U-Net is a popular architecture from this class[10]. In our approach we chose to use U-Net architecture, as it enables us to easily change and experiment with different, possibly pretrained encoder types, leaving the decoder unchanged. 
+  
 Concerning the architecture of encoders we explored, three are worth mentioning here:
  - Res-Net-34[8]
  - Dense-Net-121 [9]
